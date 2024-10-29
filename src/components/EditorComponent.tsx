@@ -14,8 +14,9 @@ import { Loader, OctagonAlert, Play } from 'lucide-react';
 import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, } from '@radix-ui/react-alert-dialog';
-
+export interface CodeSnippetsProps {
+  [key: string]: string;
+}
 
 export default function EditorComponent() {
   const {theme} =useTheme();

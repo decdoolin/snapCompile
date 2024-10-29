@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState, useCallback, useEffect } from 'react'
-import * as Y from "yjs";
 import { ModeToggleBtn } from './mode-toggle-btn'
 import SelectLanguages, { selectedLanguageOptionProps } from './SelectLanguages'
 import {
@@ -15,6 +14,7 @@ import { Loader, OctagonAlert, Play } from 'lucide-react';
 import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, } from '@radix-ui/react-alert-dialog';
 
 
 export default function EditorComponent() {

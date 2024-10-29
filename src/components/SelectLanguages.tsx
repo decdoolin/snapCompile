@@ -1,14 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+//import { useState } from 'react'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { languageOptions } from "@/config/config";
 
-
+/*
 function classNames(...classes:string[]){
     return classes.filter(Boolean).join(" ");
 }
+*/
 
 export type selectedLanguageOptionProps={
   language: string;
@@ -21,8 +22,6 @@ export default function SelectLanguages({onSelect,selectedLanguageOption,}:{
   onSelect:any; 
   selectedLanguageOption: selectedLanguageOptionProps;
 } ) {
- // const [selected, setSelected] = useState(languageOptions[0])
-  //console.log(selected);
 
   return (
     <Listbox value={selectedLanguageOption} onChange={onSelect}>

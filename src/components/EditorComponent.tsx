@@ -1,5 +1,6 @@
 "use client";
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
+import * as Y from "yjs";
 import { ModeToggleBtn } from './mode-toggle-btn'
 import SelectLanguages, { selectedLanguageOptionProps } from './SelectLanguages'
 import {
@@ -17,18 +18,14 @@ import toast from 'react-hot-toast';
 
 
 export default function EditorComponent() {
-
   const {theme} =useTheme();
   const [sourceCode, setSourceCode] = useState(codeSnippets["javascript"]);
   const [languageOption,setLanguageOption]=useState(languageOptions[0]);
   const [loading,setLoading]=useState(false)
   const [output,setOutput]=useState([])
   const [err,setErr]=useState(false)
-  //const language = languageOption.language
-  //console.log(language);
   const editorRef = useRef(null);
-  //console.log(sourceCode);
-
+  
   function handleEditorDidMount(editor:any) {
     editorRef.current = editor;
     editor.focus();
@@ -68,12 +65,11 @@ export default function EditorComponent() {
       console.log(error)
     }
   }
-  //console.log(languageOption);
   return (
     <div className= "min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
         {/* header */}
       <div className="flex items-center justify-between pb-3">
-        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>CodePoop</h2>
+        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>CodeR</h2>
         <div className="flex items-center space-x-2">
             <ModeToggleBtn/>
             <div className="w-[230px]">

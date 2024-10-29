@@ -11,11 +11,6 @@ export const languageOptions = [
     aliases: ["ts", "node-ts", "tsc", "typescript5", "ts5"],
   },
   {
-    language: "php",
-    version: "8.2.3",
-    aliases: [],
-  },
-  {
     language: "python",
     version: "3.10.0",
     aliases: ["py", "py3", "python3", "python3.10"],
@@ -29,23 +24,6 @@ export const languageOptions = [
     language: "rust",
     version: "1.68.2",
     aliases: ["rs"],
-  },
-  {
-    language: "csharp",
-    version: "6.12.0",
-    aliases: ["mono", "mono-csharp", "mono-c#", "mono-cs", "c#", "cs"],
-    runtime: "mono",
-  },
-  {
-    language: "c++",
-    version: "10.2.0",
-    aliases: ["cpp", "g++"],
-    runtime: "gcc",
-  },
-  {
-    language: "go",
-    version: "1.16.2",
-    aliases: ["go", "golang"],
   },
   {
     language: "java",
@@ -70,12 +48,6 @@ console.log(sum(3, 4));`, // Output: 7
   return a + b;
 }
 console.log(sum(3, 4));`, // Output: 7
-
-  php: `function sum($a, $b) {
-  return $a + $b;
-}
-echo sum(3, 4);`, // Output: 7
-
   python: `def sum(a, b):
     return a + b
 print(sum(3, 4))`, // Output: 7
@@ -90,36 +62,13 @@ puts sum(3, 4)`, // Output: 7
 }
 fn main() {
   println!("{}", sum(3, 4));
-}`, // Output: 7
-
-  "csharp.net": `public class Program
-{
-    public static int Sum(int a, int b)
-    {
-        return a + b;
-    }
-}
-class MainClass
-{
-    public static void Main (string[] args)
-    {
-        Console.WriteLine(Program.Sum(3, 4));
-    }
-}`, // Output: 7
-
+}`, 
   "c++": `int sum(int a, int b) {
   return a + b;
 }
 int main() {
   std::cout << sum(3, 4);
   return 0;
-}`, // Output: 7
-
-  go: `func sum(a, b int) int {
-  return a + b
-}
-func main() {
-  fmt.Println(sum(3, 4))
 }`, // Output: 7
 
   java: `public class Main {

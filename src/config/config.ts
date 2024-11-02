@@ -6,37 +6,44 @@ export const languageOptions = [
     version: "18.15.0",
     aliases: ["node-javascript", "node-js", "javascript", "js"],
     runtime: "node",
+    extension: 'js'
   },
   {
     language: "typescript",
     version: "5.0.3",
     aliases: ["ts", "node-ts", "tsc", "typescript5", "ts5"],
+    extension: 'ts'
   },
   {
     language: "python",
     version: "3.10.0",
     aliases: ["py", "py3", "python3", "python3.10"],
+    extension: 'py'
   },
   {
     language: "ruby",
     version: "3.0.1",
     aliases: ["ruby3", "rb"],
+    extension: 'rb'
   },
   {
     language: "rust",
     version: "1.68.2",
     aliases: ["rs"],
+    extension: 'rs'
   },
   {
     language: "java",
     version: "15.0.2",
     aliases: [],
+    extension: 'java'
   },
   {
     language: "c",
     version: "10.2.0",
     aliases: ["gcc"],
     runtime: "gcc",
+    extension: 'c'
   },
 ];
 

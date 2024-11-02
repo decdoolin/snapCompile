@@ -10,7 +10,7 @@ import {
   import Editor from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
-import { Loader, OctagonAlert, Play } from 'lucide-react';
+import { Download, FileDown, Loader, OctagonAlert, Play } from 'lucide-react';
 import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
@@ -26,7 +26,26 @@ export default function EditorComponent() {
   const [output,setOutput]=useState([])
   const [err,setErr]=useState(false)
   const editorRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filename, setFilename] = useState(`code.${languageOption.extension || 'txt'}`);
   
+  const handleDownLoadClick = () => {
+    setIsModalOpen(true);
+  }
+
+  const downloadCode = () => {
+    const blob = new Blob([sourceCode], { type: 'text/plan' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    setIsModalOpen(false);
+  };
+
   function handleEditorDidMount(editor:any) {
     editorRef.current = editor;
     editor.focus();
@@ -36,9 +55,10 @@ export default function EditorComponent() {
       setSourceCode(value);
     }
   }
-  function onSelect(value:selectedLanguageOptionProps){
+  function onSelect(value: selectedLanguageOptionProps){
     setLanguageOption(value);
     setSourceCode(codeSnippets[value.language]);
+    setFilename(`code.${value.extension || 'txt'}`)
   }
 
   async function executeCode(){
@@ -72,6 +92,9 @@ export default function EditorComponent() {
       <div className="flex items-center justify-between pb-3">
         <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>CodeR</h2>
         <div className="flex items-center space-x-2">
+            <Button variant="outline" size="icon" onClick={handleDownLoadClick} aria-label="Download Code">
+              <FileDown className ="w-5 h-5 text-current hover:text-gray-500" />
+              </Button>
             <ModeToggleBtn/>
             <div className="w-[230px]">
                 <SelectLanguages 
@@ -81,6 +104,25 @@ export default function EditorComponent() {
             </div>
         </div>
       </div>
+      {/* Download Modal */}
+      {isModalOpen && (
+        <div className="modal">
+          <div className = "modal-content">
+            <h3 className="text-lg font-semibold">Save File</h3>
+            <input
+              type="text"
+              value={filename}
+              onChange={(e)=> setFilename(e.target.value)}
+              className="border rounded px-2 py-1 mt-2 w-full"
+              placeholder="Enter file name"
+              />
+              <div className="flex justify-end space-x-2 mt-4">
+                <Button variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                <Button variant="outline" onClick={downloadCode}>Download</Button>
+              </div>
+            </div>
+          </div>
+      )}
       {/*Editor*/}
       <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl">
       <ResizablePanelGroup

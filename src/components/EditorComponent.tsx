@@ -7,13 +7,14 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
   } from "@/components/ui/resizable"
-  import Editor from '@monaco-editor/react';
+  import Editor, { Monaco } from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
-import { Download, FileDown, Loader, OctagonAlert, Play } from 'lucide-react';
+import {FileDown, Loader, OctagonAlert, Play, RotateCw, RotateCcw} from 'lucide-react';
 import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
+import * as monaco from 'monaco-editor';
 export interface CodeSnippetsProps {
   [key: string]: string;
 }
@@ -25,7 +26,7 @@ export default function EditorComponent() {
   const [loading,setLoading]=useState(false)
   const [output,setOutput]=useState([])
   const [err,setErr]=useState(false)
-  const editorRef = useRef(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filename, setFilename] = useState(`code.${languageOption.extension || 'txt'}`);
   
@@ -46,7 +47,7 @@ export default function EditorComponent() {
     setIsModalOpen(false);
   };
 
-  function handleEditorDidMount(editor:any) {
+  function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
     editorRef.current = editor;
     editor.focus();
   }
@@ -60,6 +61,14 @@ export default function EditorComponent() {
     setSourceCode(codeSnippets[value.language]);
     setFilename(`code.${value.extension || 'txt'}`)
   }
+
+  const undo = () => {
+    editorRef.current?.trigger('source', 'undo', null);
+  };
+
+  const redo = () => {
+    editorRef.current?.trigger('source', 'redo', null);
+  };
 
   async function executeCode(){
     setLoading(true)
@@ -90,11 +99,17 @@ export default function EditorComponent() {
     <div className= "min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
         {/* header */}
       <div className="flex items-center justify-between pb-3">
-        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>CodeR</h2>
+        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>ProCompile</h2>
         <div className="flex items-center space-x-2">
             <Button variant="outline" size="icon" onClick={handleDownLoadClick} aria-label="Download Code">
               <FileDown className ="w-5 h-5 text-current hover:text-gray-500" />
-              </Button>
+            </Button>
+            <Button variant="outline" size="icon" onClick={undo} aria-label="Undo">
+                <RotateCcw className="w-5 h-5 text-current hover:text-gray-500" />
+            </Button>
+            <Button variant="outline" size="icon" onClick={redo} aria-label="Redo">
+              <RotateCw className="w-5 h-5 text-current hover:text-gray-500" />
+            </Button>
             <ModeToggleBtn/>
             <div className="w-[230px]">
                 <SelectLanguages 

@@ -16,6 +16,7 @@ export type selectedLanguageOptionProps={
     version: string;
     aliases: string[];
     runtime?: string;
+    extension: string;
 } 
 
 export default function SelectLanguages({onSelect,selectedLanguageOption,}:{

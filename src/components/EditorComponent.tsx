@@ -15,6 +15,7 @@ import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
 import * as monaco from 'monaco-editor';
+import Footer from './Footer'
 export interface CodeSnippetsProps {
   [key: string]: string;
 }
@@ -96,7 +97,7 @@ export default function EditorComponent() {
     }
   }
   return (
-    <div className= "min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
+    <div className= "flex flex-col min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
         {/* header */}
       <div className="flex items-center justify-between pb-3">
         <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>SnapCompile</h2>
@@ -139,7 +140,7 @@ export default function EditorComponent() {
           </div>
       )}
       {/*Editor*/}
-      <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl">
+      <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl flex-grow overflow-hidden">
       <ResizablePanelGroup
       direction="horizontal"
       className="w-full rounded-lg border md:min-w-[450px] dark:bg-slate-900"
@@ -205,6 +206,7 @@ export default function EditorComponent() {
       </ResizablePanel>
     </ResizablePanelGroup>
       </div>
+      <Footer />
     </div>
-  )
+  );
 }

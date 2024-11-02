@@ -7,7 +7,7 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
   } from "@/components/ui/resizable"
-  import Editor, { Monaco } from '@monaco-editor/react';
+  import Editor from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
 import {FileDown, Loader, OctagonAlert, Play, RotateCw, RotateCcw} from 'lucide-react';

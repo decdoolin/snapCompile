@@ -99,7 +99,7 @@ export default function EditorComponent() {
     <div className= "min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
         {/* header */}
       <div className="flex items-center justify-between pb-3">
-        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>ProCompile</h2>
+        <h2 className='scroll-m-20 pb-1 text-2xl font-semibold tracking-tight first:mt-0'>SnapCompile</h2>
         <div className="flex items-center space-x-2">
             <Button variant="outline" size="icon" onClick={handleDownLoadClick} aria-label="Download Code">
               <FileDown className ="w-5 h-5 text-current hover:text-gray-500" />

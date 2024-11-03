@@ -15,8 +15,7 @@ import { codeSnippets, languageOptions } from '@/config/config';
 import { compileCode } from '@/actions/compile';
 import toast from 'react-hot-toast';
 import * as monaco from 'monaco-editor';
-import Footer from './Footer'
-import { Analytics } from "@vercel/analytics/react"
+import Footer from './Footer';
 export interface CodeSnippetsProps {
   [key: string]: string;
 }
@@ -141,7 +140,6 @@ export default function EditorComponent() {
           </div>
       )}
       {/*Editor*/}
-      <Analytics></Analytics>
       <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl flex-grow overflow-hidden">
       <ResizablePanelGroup
       direction="horizontal"

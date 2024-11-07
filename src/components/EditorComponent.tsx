@@ -26,6 +26,7 @@ export default function EditorComponent() {
   const [languageOption,setLanguageOption]=useState(languageOptions[0]);
   const [loading,setLoading]=useState(false)
   const [output,setOutput]=useState([])
+  const [userInput, setUserInput] = useState("")
   const [err,setErr]=useState(false)
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,7 +82,8 @@ export default function EditorComponent() {
         {
           content: sourceCode,
         }
-      ]
+      ],
+      stdin: userInput,
     };
     try {
       const result = await compileCode(requestData)
@@ -132,13 +134,25 @@ export default function EditorComponent() {
               className="border rounded px-2 py-1 mt-2 w-full"
               placeholder="Enter file name"
               />
-              <div className="flex justify-end space-x-2 mt-4">
+              <div className="flex justify-end space-x-2 py-2 mt-4">
                 <Button variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
                 <Button variant="outline" onClick={downloadCode}>Download</Button>
               </div>
             </div>
           </div>
       )}
+      {/* Input */}
+      <div className="mt-4">
+      <label htmlFor="input" className="block text-lg font-semibold mb-2">Input</label>
+      <textarea 
+       id="input"
+       value={userInput}
+       onChange={(e) => setUserInput(e.target.value)}
+       className="w-full p-2 border rounded-lg bg-slate-400 dark:bg-slate-900 placeholder-slate-100"
+       rows={1}
+       placeholder="Enter arguments..."
+  >    </textarea>
+</div>
       {/*Editor*/}
       <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl flex-grow overflow-hidden">
       <ResizablePanelGroup
@@ -166,7 +180,7 @@ export default function EditorComponent() {
               <Button 
               disabled
               size={"sm"} 
-              className="dark:bg-purple-600 dark:hover:bg-purple-700
+              className="dark:bg-sky-950 dark:hover:bg-sky-900
               text-slate-100 bg-slate-800 hover:bg-slate-900">
                   <Loader className = "w-3 h-4 mr-2 animate-spin"/>
                   <span>Running please wait...</span>
@@ -174,8 +188,8 @@ export default function EditorComponent() {
             ):(
             <Button onClick={executeCode}
               size={"sm"} 
-              className="dark:bg-purple-600 dark:hover:bg-purple-700
-              text-slate-100 bg-slate-800 hover:bg-slate-900">
+              className="dark:bg-sky-950 dark:hover:bg-sky-900
+              text-slate-50 bg-slate-800 hover:bg-slate-900">
                   <Play className = "w-3 h-4 mr-2"/>
                   <span>Run</span>
               </Button>

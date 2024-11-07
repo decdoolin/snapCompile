@@ -151,7 +151,7 @@ export default function EditorComponent() {
        className="w-full p-2 border rounded-lg bg-slate-400 dark:bg-slate-900 placeholder-slate-100"
        rows={1}
        placeholder="Enter arguments..."
-  >    </textarea>
+  />    
 </div>
       {/*Editor*/}
       <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl flex-grow overflow-hidden">

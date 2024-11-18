@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast"
 import { Analytics } from '@vercel/analytics/react';
-
+import Head from 'next/head'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,6 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <link rel="icon" href="/Snap.png" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Toaster

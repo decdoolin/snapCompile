@@ -45,6 +45,15 @@ export const languageOptions = [
     runtime: "gcc",
     extension: 'c'
   },
+  {
+    language: "prolog",
+    version: "8.2.4",
+    aliases: [
+      "prolog",
+      "plg"
+    ],
+    extension: 'pro'
+  }
 ];
 
 export const codeSnippets: CodeSnippetsProps= {
@@ -96,6 +105,13 @@ int main() {
   printf("%d", sum(3, 4));
   return 0;
 }`, // Output: 7
+prolog: `% Define the sum predicate
+sum(A, B, Result) :-
+    Result is A + B.
+
+% Example usage
+:- sum(3, 4, Result), write(Result).`, // Output: 7
 };
+
   
       

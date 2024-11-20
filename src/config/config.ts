@@ -52,7 +52,7 @@ export const languageOptions = [
       "prolog",
       "plg"
     ],
-    extension: 'pro'
+    extension: 'pl'
   },
   {
     "language": "go",

@@ -53,6 +53,15 @@ export const languageOptions = [
       "plg"
     ],
     extension: 'pro'
+  },
+  {
+    "language": "go",
+    "version": "1.16.2",
+    "aliases": [
+      "go",
+      "golang"
+    ],
+    extension: 'go'
   }
 ];
 
@@ -111,6 +120,17 @@ sum(A, B, Result) :-
 
 % Example usage
 :- sum(3, 4, Result), write(Result).`, // Output: 7
+  go: `package main
+
+import "fmt"
+
+func sum(a int, b int) int {
+    return a + b
+}
+
+func main() {
+    fmt.Println(sum(3, 4))
+}`, // Output: 7
 };
 
   

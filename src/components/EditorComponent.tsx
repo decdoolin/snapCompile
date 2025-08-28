@@ -33,10 +33,7 @@ export default function EditorComponent() {
   const [filename, setFilename] = useState(`code.${languageOption.extension || 'txt'}`);
   
   const handleDownLoadClick = () => {
-    if(isModalOpen){
-      setIsModalOpen(false);
-    }
-    setIsModalOpen(true);
+    setIsModalOpen((prev) => !prev);
   }
 
   const downloadCode = () => {

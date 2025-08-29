@@ -37,11 +37,24 @@ export default function EditorComponent() {
   }
 
   const downloadCode = () => {
+    if(filename.length > 30){
+      alert("Filename is too long, please keep it under 30 characters.");
+      return;
+    }
+
+    let safeFileName = filename;
+    if(safeFileName.length > 30){
+      safeFileName = safeFileName.slice(0, 30);
+    }
+
+    if(!safeFileName.includes){
+      safeFileName += '.txt';
+    }
     const blob = new Blob([sourceCode], { type: 'text/plan' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = filename;
+    link.download = safeFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

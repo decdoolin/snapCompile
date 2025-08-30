@@ -37,11 +37,6 @@ export default function EditorComponent() {
   }
 
   const downloadCode = () => {
-    if(filename.length > 30){
-      alert("Filename is too long, please keep it under 30 characters.");
-      return;
-    }
-
     let safeFileName = filename;
     if(safeFileName.length > 30){
       safeFileName = safeFileName.slice(0, 30);
@@ -143,8 +138,15 @@ export default function EditorComponent() {
             <input
               type="text"
               value={filename}
-              onChange={(e)=> setFilename(e.target.value)}
+              onChange={(e)=> {
+                let value = e.target.value;
+                if(value.length > 30){
+                  alert("Filename is too long, please keep it under 30 characters.");
+                  value = value.slice(0,30);
+                }
+                setFilename(value)}}
               className="border rounded px-2 py-1 mt-2 w-full"
+             
               placeholder="Enter file name"
               />
               <div className="flex justify-end space-x-2 py-2 mt-4">

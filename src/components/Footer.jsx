@@ -16,9 +16,9 @@ const Footer = () => {
           </button>
         </div>
         <div className="flex space-x-4">
-          {/* You can add other links or social icons here if needed */}
+          {/* You casn add other links or social icons here if needed */}
         </div>
-      </div>
+      </div>  
       <div className="text-center mt-4">
         <p>&copy; {new Date().getFullYear()} Declan Doolin. All rights reserved.</p>
       </div>

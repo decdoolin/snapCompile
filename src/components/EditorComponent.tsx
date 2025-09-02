@@ -29,11 +29,16 @@ export default function EditorComponent() {
   const [userInput, setUserInput] = useState("")
   const [err,setErr]=useState(false)
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+  const [isInputModalOpen, setIsInputModalOpen] = useState(false);
   const [filename, setFilename] = useState(`code.${languageOption.extension || 'txt'}`);
   
   const handleDownLoadClick = () => {
-    setIsModalOpen((prev) => !prev);
+    setIsDownloadModalOpen((prev) => !prev);
+  }
+
+  const handleInputClick = () => {
+    setIsInputModalOpen((prev) => !prev);
   }
 
   const downloadCode = () => {
@@ -54,7 +59,7 @@ export default function EditorComponent() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    setIsModalOpen(false);
+    setIsDownloadModalOpen(false);
   };
 
   function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
@@ -121,6 +126,9 @@ export default function EditorComponent() {
             <Button variant="outline" size="icon" onClick={redo} aria-label="Redo">
               <RotateCw className="w-5 h-5 text-current hover:text-gray-500" />
             </Button>
+            <Button variant="outline" size="icon" onClick={handleInputClick} aria-label="User Input">
+              <Play className ="w-5 h-5 text-current hover:text-gray-500" />
+            </Button>
             <ModeToggleBtn/>
             <div className="w-[230px]">
                 <SelectLanguages 
@@ -131,7 +139,7 @@ export default function EditorComponent() {
         </div>
       </div>
       {/* Download Modal */}
-      {isModalOpen && (
+      {isDownloadModalOpen && (
         <div className="modal">
           <div className = "modal-content">
             <h3 className="text-lg font-semibold">Save File</h3>
@@ -150,24 +158,34 @@ export default function EditorComponent() {
               placeholder="Enter file name"
               />
               <div className="flex justify-end space-x-2 py-2 mt-4">
-                <Button variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
+                <Button variant="outline" onClick={() => setIsDownloadModalOpen(false)}>Cancel</Button>
                 <Button variant="outline" onClick={downloadCode}>Download</Button>
               </div>
             </div>
           </div>
       )}
-      {/* Input */}
-      <div className="mt-4">
-      <label htmlFor="input" className="block text-lg font-semibold mb-2">Input</label>
-      <textarea 
-       id="input"
-       value={userInput}
-       onChange={(e) => setUserInput(e.target.value)}
-       className="w-full p-2 border rounded-lg bg-slate-400 dark:bg-slate-900 placeholder-slate-100"
-       rows={1}
-       placeholder="Enter arguments..."
-  />    
-</div>
+
+      {/* Input Modal */}
+      {isInputModalOpen && (
+        <div className="modal">
+          <div className = "modal-content">
+            <h3 className="text-lg font-semibold">User Input</h3>
+              <input
+              type="text"
+              value={userInput}
+              onChange={(e)=> setUserInput(e.target.value)}
+              className="border rounded px-2 py-1 mt-2 w-full"
+              placeholder="Enter input for your code"
+              />
+              <div className="flex justify-end space-x-2 py-2 mt-4">
+                <Button variant="outline" onClick={() => setIsInputModalOpen(false)}>Cancel</Button>
+                <Button variant="outline" onClick={() => setIsInputModalOpen(false)}>Save</Button>
+              </div>
+            </div>
+          </div>
+             
+      )}
+
       {/*Editor*/}
       <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl flex-grow overflow-hidden">
       <ResizablePanelGroup

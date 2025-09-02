@@ -141,7 +141,7 @@ export default function EditorComponent() {
               onChange={(e)=> {
                 let value = e.target.value;
                 if(value.length > 30){
-                  alert("Filename is too long, please keep it under 30 characters.");
+                  alert("Please keep file name under 30 characters.");
                   value = value.slice(0,30);
                 }
                 setFilename(value)}}
